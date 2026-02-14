@@ -181,3 +181,23 @@ def get_stats():
         "model_accuracy": "53.2%",
         "outcome_distribution": df["outcome"].value_counts().to_dict()
     }
+
+# ── Data update endpoint ─────────────────────────────────
+from api.update_data import update_dataset
+import threading
+
+@app.post("/admin/update-data")
+def trigger_update():
+    """Fetch latest match results and update the dataset"""
+    def run():
+        update_dataset()
+    thread = threading.Thread(target=run)
+    thread.daemon = True
+    thread.start()
+    return {"message": "Data update started in background", "status": "running"}
+
+@app.get("/admin/latest-matches")
+def latest_matches(n: int = 10):
+    """Show the most recent matches in the dataset"""
+    recent = df.tail(n)[["date","home_team","away_team","home_goals","away_goals","outcome","league"]]
+    return {"matches": recent.to_dict(orient="records"), "total_in_dataset": len(df)}
