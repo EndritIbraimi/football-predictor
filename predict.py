@@ -87,7 +87,7 @@ if __name__ == "__main__":
     print("Model accuracy: 53.2% | Trained on 6,469 matches")
 
     # ── UPDATE THESE EACH GAMEWEEK ──────────────────────
-    predict_match("Arsenal",          "Manchester City", 2.50, 3.40, 2.80)
+    predict_match("Arsenal",          "Man City", 2.50, 3.40, 2.80)
     predict_match("Barcelona",        "Real Madrid",     2.10, 3.50, 3.40)
     predict_match("Liverpool",        "Everton",         1.45, 4.50, 7.00)
     # ────────────────────────────────────────────────────
